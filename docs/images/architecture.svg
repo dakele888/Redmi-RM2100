@@ -1,0 +1,46 @@
+<svg viewBox="0 0 680 400" width="680" height="400" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>WISP 数据路径与组件</title>
+<desc>上游 WiFi 经无线 STA apclii0 作为 WAN 接入，本机做 NAT、防火墙、DHCP 与 IPv6 代理，向 192.168.31.1 内网提供双栈服务；eth1 可作为有线 WAN 备份。</desc>
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+<rect x="0" y="0" width="680" height="400" fill="#ffffff"/>
+
+<rect x="40" y="30" width="180" height="56" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="130" y="52" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="#042C53" text-anchor="middle">上游 WiFi / 光猫</text>
+<text x="130" y="70" font-family="system-ui, sans-serif" font-size="12" fill="#185FA5" text-anchor="middle">PPPoE 线路 MTU 1492</text>
+
+<rect x="40" y="120" width="180" height="56" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text x="130" y="142" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="#412402" text-anchor="middle">eth1（备用）</text>
+<text x="130" y="160" font-family="system-ui, sans-serif" font-size="12" fill="#854F0B" text-anchor="middle">有线 WAN，插线优先</text>
+
+<rect x="270" y="60" width="180" height="88" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="360" y="84" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="#04342C" text-anchor="middle">WAN = apclii0</text>
+<text x="360" y="104" font-family="system-ui, sans-serif" font-size="12" fill="#0F6E56" text-anchor="middle">无线 STA 当出口网口</text>
+<text x="360" y="124" font-family="system-ui, sans-serif" font-size="12" fill="#0F6E56" text-anchor="middle">MTU 1492 · 关 hwnat</text>
+
+<rect x="270" y="190" width="180" height="112" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="360" y="212" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="#26215C" text-anchor="middle">本机：网关职责</text>
+<text x="360" y="234" font-family="system-ui, sans-serif" font-size="12" fill="#534AB7" text-anchor="middle">NAT + 防火墙</text>
+<text x="360" y="252" font-family="system-ui, sans-serif" font-size="12" fill="#534AB7" text-anchor="middle">dnsmasq（DHCP/DNS）</text>
+<text x="360" y="270" font-family="system-ui, sans-serif" font-size="12" fill="#534AB7" text-anchor="middle">wan_6（DHCPv6 + PD）</text>
+<text x="360" y="288" font-family="system-ui, sans-serif" font-size="12" fill="#534AB7" text-anchor="middle">odhcpd（RA 通告 1492）</text>
+
+<rect x="500" y="190" width="140" height="112" rx="10" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="570" y="212" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="#2C2C2A" text-anchor="middle">LAN</text>
+<text x="570" y="234" font-family="system-ui, sans-serif" font-size="12" fill="#5F5E5A" text-anchor="middle">192.168.31.1</text>
+<text x="570" y="252" font-family="system-ui, sans-serif" font-size="12" fill="#5F5E5A" text-anchor="middle">DHCP 100-249</text>
+<text x="570" y="270" font-family="system-ui, sans-serif" font-size="12" fill="#5F5E5A" text-anchor="middle">IPv4 + IPv6 双栈</text>
+<text x="570" y="288" font-family="system-ui, sans-serif" font-size="12" fill="#5F5E5A" text-anchor="middle">.250 管理别名</text>
+
+<line x1="220" y1="58" x2="266" y2="90" stroke="#185FA5" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<line x1="220" y1="148" x2="266" y2="122" stroke="#854F0B" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<line x1="360" y1="148" x2="360" y2="186" stroke="#0F6E56" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+<line x1="450" y1="246" x2="496" y2="246" stroke="#534AB7" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+
+<rect x="40" y="330" width="600" height="48" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text x="60" y="352" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#412402">只有 2 个文件是"补丁"：/usr/sbin/wwdog、/usr/sbin/ap_mode.sh（bind mount 覆盖只读区）</text>
+<text x="60" y="370" font-family="system-ui, sans-serif" font-size="12" fill="#854F0B">其余全部是我们的程序（/data/route）+ 直接改写的 /etc 配置，一键可回退</text>
+</svg>

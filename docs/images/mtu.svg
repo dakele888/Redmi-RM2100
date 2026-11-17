@@ -1,0 +1,29 @@
+<svg viewBox="0 0 680 330" width="680" height="330" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>MTU 1500 与 1492 的区别</title>
+<desc>PPPoE 链路一帧上限 1500 字节，其中 8 字节被 PPPoE/PPP 头占用，留给 IP 包的只有 1492 字节。设备若按 1500 生成 IP 包，IPv4 靠分片通过，IPv6 则直接丢弃。</desc>
+<rect x="0" y="0" width="680" height="330" fill="#ffffff"/>
+
+<text x="40" y="34" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="#2C2C2A">链路一帧上限 1500 字节（PPPoE 拨号）</text>
+<rect x="40" y="46" width="560" height="48" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<rect x="44" y="50" width="86" height="40" rx="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text x="87" y="70" font-family="system-ui, sans-serif" font-size="11" fill="#042C53" text-anchor="middle" dominant-baseline="central">PPPoE 8B</text>
+<rect x="134" y="50" width="462" height="40" rx="6" fill="#85B7EB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="365" y="70" font-family="system-ui, sans-serif" font-size="13" fill="#042C53" text-anchor="middle" dominant-baseline="central">IP 包 1492 字节 — 装得下</text>
+
+<text x="40" y="122" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="#2C2C2A">设备按 1500 生成 IP 包</text>
+<rect x="40" y="134" width="560" height="48" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<rect x="44" y="138" width="86" height="40" rx="6" fill="#F7C1C1" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="87" y="158" font-family="system-ui, sans-serif" font-size="11" fill="#501313" text-anchor="middle" dominant-baseline="central">PPPoE 8B</text>
+<rect x="134" y="138" width="462" height="40" rx="6" fill="#F09595" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="365" y="158" font-family="system-ui, sans-serif" font-size="13" fill="#501313" text-anchor="middle" dominant-baseline="central">IP 包 1500 字节 — 超出 8 字节，装不进</text>
+
+<rect x="40" y="206" width="272" height="84" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="60" y="230" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#2C2C2A">IPv4：路由器切分</text>
+<text x="60" y="252" font-family="system-ui, sans-serif" font-size="12" fill="#5F5E5A">分片后能通，TCP 又自动缩小包</text>
+<text x="60" y="272" font-family="system-ui, sans-serif" font-size="12" fill="#5F5E5A">所以测速看起来完全正常</text>
+
+<rect x="328" y="206" width="272" height="84" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="348" y="230" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#501313">IPv6：不许中途切分</text>
+<text x="348" y="252" font-family="system-ui, sans-serif" font-size="12" fill="#791F1F">大包直接丢弃，浏览器一直转圈</text>
+<text x="348" y="272" font-family="system-ui, sans-serif" font-size="12" fill="#791F1F">网站/视频优先走 IPv6，于是打不开</text>
+</svg>
